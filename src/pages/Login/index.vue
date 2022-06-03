@@ -14,9 +14,13 @@
 
           <el-form-item>
             <el-col :span="24">
-              <el-button type="primary" icon="el-icon-upload" @click="doLogin()">登 录</el-button>
+              <el-button
+                type="primary"
+                @click="doLogin()"
+                size="small"
+              >登&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp录</el-button>
               <router-link to="/register">
-                <el-button type="success">注册账号</el-button>
+                <el-button type="success" size="small">注册账号</el-button>
               </router-link>
             </el-col>
           </el-form-item>
@@ -38,7 +42,11 @@ export default {
     }
   },
   created() {},
-  methods: {},
+  methods: {
+    doLogin() {
+      this.$message('error')
+    },
+  },
 }
 </script>
  
@@ -79,9 +87,5 @@ a {
 }
 a:hover {
   color: coral;
-}
-.el-button {
-  width: 80%;
-  margin-left: -50px;
 }
 </style>
