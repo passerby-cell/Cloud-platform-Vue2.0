@@ -4,12 +4,20 @@ import Job from '@/pages/Job'
 import Data from '@/pages/Data'
 import Images from '@/pages/Images'
 import File from '@/pages/File'
+import Register from '@/pages/Register'
 export default [
   // ?:用于指定params参数可传可不传,没有问号时,不传params参数时路径会出现丢失的情况
   {
     name: 'login',
     path: '/login',
     component: Login,
+    meta: {
+      show: false,
+    }
+  }, {
+    name: 'register',
+    path: '/register',
+    component: Register,
     meta: {
       show: false,
     }

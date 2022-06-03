@@ -81,12 +81,12 @@ export default {
 .login {
   width: 100%;
   height: 740px;
-  background: url('../assets/images/bg1.png') no-repeat;
+  /* background: url('../assets/images/bg1.png') no-repeat; */
   background-size: cover;
   overflow: hidden;
 }
 .login-wrap {
-  background: url('../assets/images/login_bg.png') no-repeat;
+  /* background: url('../assets/images/login_bg.png') no-repeat; */
   background-size: cover;
   width: 400px;
   height: 300px;
