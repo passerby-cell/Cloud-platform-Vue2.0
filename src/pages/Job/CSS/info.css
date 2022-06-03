@@ -1,0 +1,9 @@
+.el-table .warning-row {
+  background-color: #F9E3E1;
+  opacity: 0.8;
+}
+
+.el-table .success-row {
+  background-color: #E4F2DA;
+  opacity: 0.8;
+}

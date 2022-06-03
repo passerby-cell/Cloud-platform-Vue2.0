@@ -46,7 +46,7 @@
   </div>
 </template>
  
-<script>
+<script scoped>
 export default {
   name: 'Login',
   data() {
@@ -60,7 +60,7 @@ export default {
   created() {},
   methods: {
     doLogin() {
-      this.$message('error')
+      this.$router.push({ name: 'job' })
     },
   },
 }
@@ -83,6 +83,5 @@ export default {
   background: url('@/assets/images/bg.jpg') no-repeat;
   background-size: cover;
   overflow: hidden;
-  background-color: #409eff;
 }
 </style>

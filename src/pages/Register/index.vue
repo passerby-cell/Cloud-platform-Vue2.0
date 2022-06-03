@@ -40,7 +40,7 @@
               </el-col>
               <el-col :span="6" :offset="4">
                 <router-link to="/register" style="margin-left: 20px;">
-                  <el-button type="success" size="small">注册账号</el-button>
+                  <el-button type="success" size="small">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</el-button>
                 </router-link>
               </el-col>
             </el-row>
@@ -86,9 +86,7 @@ export default {
   width: 100%;
   height: 800px;
   background: url('@/assets/images/bg.jpg') no-repeat;
-
   background-size: cover;
   overflow: hidden;
-  background-color: #409eff;
 }
 </style>
