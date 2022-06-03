@@ -3,11 +3,9 @@ import App from './App.vue'
 import store from '@/store/index'
 import VueRouter from 'vue-router'
 import 'animate.css'
-//注册为全局组件,引入后一定要使用如下配置:
-//  Vue.component(Banner.name, Banner)
-//  Vue.component(Pagination.name, Pagination)
-import Banner from '@/components/Banner/index.vue'
-import Pagination from '@/components/Pagination/index.vue'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 //引入mock模块
 import './mock/mockServer.js'
 //引入swiper样式
@@ -18,10 +16,9 @@ import router from '@/router'
 
 
 Vue.use(VueRouter)
+Vue.use(ElementUI);
 
-//vc使用全局组件
-Vue.component(Banner.name, Banner)
-Vue.component(Pagination.name, Pagination)
+
 
 
 Vue.config.productionTip = false

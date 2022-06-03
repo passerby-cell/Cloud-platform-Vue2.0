@@ -13,3 +13,5 @@
 `npm i nprogress`
 ## install swiper 轮播图
 `npm i swiper@5`
+## install iview 
+`npm install iview`

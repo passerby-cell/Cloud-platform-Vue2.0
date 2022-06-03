@@ -1,18 +1,54 @@
 //引入路由的组件
-import Home from '@/pages/Home'
-
-export default [{
-    // ?:用于指定params参数可传可不传,没有问号时,不传params参数时路径会出现丢失的情况
-    path: '/home/:keyword?',
-    component: Home,
+import Login from '@/pages/Login'
+import Job from '@/pages/Job'
+import Data from '@/pages/Data'
+import Images from '@/pages/Images'
+import File from '@/pages/File'
+export default [
+  // ?:用于指定params参数可传可不传,没有问号时,不传params参数时路径会出现丢失的情况
+  {
+    name: 'login',
+    path: '/login',
+    component: Login,
     meta: {
-      // 通过路由元信息携带参数
-      showFooter: true,
+      show: false,
     }
   },
-  //重定向到home
+  {
+    name: 'job',
+    path: '/job',
+    component: Job,
+    meta: {
+      show: true,
+    }
+  },
+  {
+    name: 'images',
+    path: '/images',
+    component: Images,
+    meta: {
+      show: true,
+    }
+  },
+  {
+    name: 'file',
+    path: '/file',
+    component: File,
+    meta: {
+      show: true,
+    }
+  },
+  {
+    name: 'data',
+    path: '/data',
+    component: Data,
+    meta: {
+      show: true,
+    }
+  },
+  //重定向到login
   {
     path: '*',
-    redirect: '/home'
+    redirect: '/job'
   },
 ]

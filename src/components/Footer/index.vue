@@ -1,10 +1,10 @@
 <template>
-  <Pagination :pageNo="2" :total="890" :pageSize="10" :continue="5"></Pagination>
+  <div style="text-align: center; font-size:16px;">2022&copy;Cloud@NUIST</div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Footer',
   data() {
     return {}
   },
