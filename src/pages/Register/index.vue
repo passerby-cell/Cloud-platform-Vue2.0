@@ -1,112 +1,94 @@
 <template>
-  <div class="login clearfix">
-    <div class="login-wrap">
-      <el-row type="flex" justify="center">
-        <el-form ref="loginForm" :model="user" status-icon label-width="80px">
-          <h3>注册</h3>
-          <hr />
+  <div class="login">
+    <el-col :span="7" :offset="15">
+      <el-card shadow="hover">
+        <div slot="header" class="clearfix">
+          <span class="login-font">注册</span>
+        </div>
+
+        <el-form ref="loginForm" :model="user">
           <el-form-item prop="username" label="用户名">
-            <el-input v-model="user.username" placeholder="请输入用户名"></el-input>
+            <label slot="label">用&nbsp;&nbsp;户&nbsp;名</label>
+            <el-row>
+              <el-col :span="18">
+                <el-input v-model="user.username" placeholder="请输入用户名" prefix-icon size="small"></el-input>
+              </el-col>
+            </el-row>
           </el-form-item>
-          <el-form-item prop="email" label="邮箱">
-            <el-input v-model="user.email" placeholder="请输入邮箱"></el-input>
+
+          <el-form-item id="password" prop="password" label="密码">
+            <label slot="label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+            <el-row>
+              <el-col :span="18">
+                <el-input v-model="user.password" show-password placeholder="请输入密码" size="small"></el-input>
+              </el-col>
+            </el-row>
           </el-form-item>
-          <el-form-item prop="password" label="设置密码">
-            <el-input v-model="user.password" show-password placeholder="请输入密码"></el-input>
+          <el-form-item id="password" prop="password" label="密码">
+            <label slot="label">二次确认</label>
+            <el-row>
+              <el-col :span="18">
+                <el-input v-model="user.password" show-password placeholder="请输入密码" size="small"></el-input>
+              </el-col>
+            </el-row>
           </el-form-item>
+
           <el-form-item>
-            <el-button type="primary" icon @click="doRegister()">注册账号</el-button>
+            <el-row>
+              <el-col :span="6" :offset="4">
+                <el-button type="primary" @click="goLogin" size="small">返回登录</el-button>
+              </el-col>
+              <el-col :span="6" :offset="4">
+                <router-link to="/register" style="margin-left: 20px;">
+                  <el-button type="success" size="small">注册账号</el-button>
+                </router-link>
+              </el-col>
+            </el-row>
           </el-form-item>
         </el-form>
-      </el-row>
-    </div>
+      </el-card>
+    </el-col>
   </div>
 </template>
  
 <script>
 export default {
-  name: 'Register',
+  name: 'Login',
   data() {
     return {
       user: {
         username: '',
-        email: '',
         password: '',
       },
     }
   },
   created() {},
   methods: {
-    doRegister() {
-      if (!this.user.username) {
-        this.$message.error('请输入用户名！')
-        return
-      } else if (!this.user.email) {
-        this.$message.error('请输入邮箱！')
-        return
-      } else if (this.user.email != null) {
-        var reg =
-          /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-        if (!reg.test(this.user.email)) {
-          this.$message.error('请输入有效的邮箱！')
-        } else if (!this.user.password) {
-          this.$message.error('请输入密码！')
-          return
-        } else {
-          // this.$router.push({ path: "/" }); //无需向后台提交数据，方便前台调试
-          axios
-            .post('/register/', {
-              name: this.user.username,
-              email: this.user.email,
-              password: this.user.password,
-            })
-            .then((res) => {
-              // console.log("输出response.data", res.data);
-              // console.log("输出response.data.status", res.data.status);
-              if (res.data.status === 200) {
-                this.$router.push({ path: '/' })
-              } else {
-                alert('您输入的用户名已存在！')
-              }
-            })
-        }
-      }
+    goLogin() {
+      this.$router.push({ name: 'login' })
     },
   },
 }
 </script>
  
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
+.login-font {
+  font-size: 20px;
+  color: #409eff;
+}
+.el-card {
+  margin-top: 170px;
+  opacity: 0.8;
+  background-color: #aacefb;
+}
 .login {
   width: 100%;
-  height: 740px;
-  /* background: url('../assets/images/bg1.png') no-repeat; */
+  height: 800px;
+  background: url('@/assets/images/bg.jpg') no-repeat;
+
   background-size: cover;
   overflow: hidden;
-}
-.login-wrap {
-  /* background: url('../assets/images/login_bg.png') no-repeat; */
-  background-size: cover;
-  width: 400px;
-  height: 300px;
-  margin: 215px auto;
-  overflow: hidden;
-  padding-top: 10px;
-  line-height: 20px;
-}
-
-h3 {
-  color: #0babeab8;
-  font-size: 24px;
-}
-hr {
-  background-color: #444;
-  margin: 20px auto;
-}
-
-.el-button {
-  width: 80%;
-  margin-left: -50px;
+  background-color: #409eff;
 }
 </style>

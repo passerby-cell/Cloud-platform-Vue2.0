@@ -66,7 +66,7 @@ export default {
 }
 </script>
  
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 .login-font {
   font-size: 20px;
@@ -74,13 +74,13 @@ export default {
 }
 .el-card {
   margin-top: 170px;
-  opacity: 0.8;
+  opacity: 0.7;
   background-color: #aacefb;
 }
 .login {
   width: 100%;
   height: 800px;
-  /* background: url('../assets/images/bg1.png') no-repeat; */
+  background: url('@/assets/images/bg.jpg') no-repeat;
   background-size: cover;
   overflow: hidden;
   background-color: #409eff;
