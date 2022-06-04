@@ -5,6 +5,7 @@ import Data from '@/pages/Data'
 import Images from '@/pages/Images'
 import File from '@/pages/File'
 import Register from '@/pages/Register'
+import StandardJob from '@/pages/StandardJob'
 export default [
   // ?:用于指定params参数可传可不传,没有问号时,不传params参数时路径会出现丢失的情况
   {
@@ -14,7 +15,16 @@ export default [
     meta: {
       show: false,
     }
-  }, {
+  },
+  {
+    name: 'standardjob',
+    path: '/standardjob',
+    component: StandardJob,
+    meta: {
+      show: true,
+    }
+  },
+  {
     name: 'register',
     path: '/register',
     component: Register,
@@ -53,10 +63,5 @@ export default [
     meta: {
       show: true,
     }
-  },
-  //重定向到login
-  {
-    path: '*',
-    redirect: '/job'
   },
 ]

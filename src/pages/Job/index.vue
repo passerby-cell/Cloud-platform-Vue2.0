@@ -10,6 +10,7 @@
       type="primary"
       icon="el-icon-edit"
       size="small"
+      @click="goStandardJob"
     >新建作业</el-button>
 
     <el-table
@@ -129,6 +130,10 @@ export default {
         return 'warning-row'
       }
       return ''
+    },
+    goStandardJob() {
+      console.log('www')
+      this.$router.push({ name: 'standardjob' })
     },
   },
 }
