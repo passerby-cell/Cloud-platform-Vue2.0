@@ -27,8 +27,8 @@
       <el-table-column prop="works" label="总任务数" sortable width="110"></el-table-column>
       <el-table-column prop="isDone" label="运行完成数" width="120" sortable></el-table-column>
       <el-table-column prop="inLine" label="排队中"></el-table-column>
-      <el-table-column prop="CPU" label="cpu使用量" width="120" sortable></el-table-column>
-      <el-table-column prop="MEM" label="内存使用量" width="120" sortable></el-table-column>
+      <el-table-column prop="CPU" label="cpu使用量" width="160" sortable></el-table-column>
+      <el-table-column prop="MEM" label="内存使用量" width="160" sortable></el-table-column>
       <el-table-column prop="status" label="状态" sortable></el-table-column>
       <el-table-column prop="update" label="操作" width="160">
         <template slot-scope="scope">

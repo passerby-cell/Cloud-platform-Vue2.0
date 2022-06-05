@@ -11,17 +11,15 @@
       </el-col>
       <el-col :span="2" :offset="20">
         <el-submenu index="1">
-          <template slot="title">
-            <div>
-              <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-            </div>
-          </template>
           <el-menu-item index="1-1">
             <i class="el-icon-edit"></i>修改密码
           </el-menu-item>
+          <template slot="title">
+            <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+          </template>
         </el-submenu>
       </el-col>
-      <el-col :span="1.5">
+      <el-col :span="1">
         <el-menu-item index="2">Logout</el-menu-item>
       </el-col>
     </el-menu>

@@ -81,8 +81,8 @@
         <el-table-column prop="name" label="任务名称"></el-table-column>
         <el-table-column prop="works" label="实例个数" sortable></el-table-column>
         <el-table-column prop="miniWorks" label="实例最小个数" sortable></el-table-column>
-        <el-table-column prop="CPUNum" label="CPU核心数(核)" width="120" sortable></el-table-column>
-        <el-table-column prop="MEM" label="内存使用量(GB)" width="120" sortable></el-table-column>
+        <el-table-column prop="CPUNum" label="CPU核心数(核)" width="160" sortable></el-table-column>
+        <el-table-column prop="MEM" label="内存使用量(GB)" width="160" sortable></el-table-column>
         <el-table-column prop="status" label="状态" sortable></el-table-column>
         <el-table-column prop="update" label="操作" width="160">
           <template slot-scope="scope">
