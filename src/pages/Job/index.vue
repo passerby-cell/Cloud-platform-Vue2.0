@@ -132,7 +132,6 @@ export default {
       return ''
     },
     goStandardJob() {
-      console.log('www')
       this.$router.push({ name: 'standardjob' })
     },
   },
