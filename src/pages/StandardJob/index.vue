@@ -209,18 +209,182 @@
         <el-form-item label="高级配置" :label-width="formLabelWidth">
           <el-tabs v-model="activeName">
             <el-tab-pane label="端口" name="first">
-              <el-card></el-card>
+              <el-card>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;添加端口
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-col :span="6">
+                    <el-input placeholder="端口"></el-input>
+                  </el-col>
+                  <el-col :span="6" :offset="1">
+                    <el-select style="width:100%" v-model="form.portType">
+                      <el-option label="TCP" value="TCP"></el-option>
+                      <el-option label="UDP" value="UDP"></el-option>
+                    </el-select>
+                  </el-col>
+                  <el-col :span="1" :offset="1">
+                    <el-button type="primary" size="small">添加</el-button>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;管理变量
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-table border style="width: 100%">
+                    <el-table-column label="名称"></el-table-column>
+                    <el-table-column label="端口"></el-table-column>
+                    <el-table-column label="协议"></el-table-column>
+                    <el-table-column label="操作"></el-table-column>
+                  </el-table>
+                </el-row>
+              </el-card>
             </el-tab-pane>
             <el-tab-pane label="环境变量" name="second">
-              <el-card></el-card>
+              <el-card>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;添加变量
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-col :span="6">
+                    <el-input placeholder="Key"></el-input>
+                  </el-col>
+                  <el-col :span="6" :offset="1">
+                    <el-input placeholder="Value"></el-input>
+                  </el-col>
+                  <el-col :span="1" :offset="1">
+                    <el-button type="primary" size="small">添加</el-button>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;管理变量
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-table border style="width: 100%">
+                    <el-table-column label="Key"></el-table-column>
+                    <el-table-column label="Value"></el-table-column>
+                    <el-table-column label="操作"></el-table-column>
+                  </el-table>
+                </el-row>
+              </el-card>
             </el-tab-pane>
             <el-tab-pane label="存储变量" name="third">
-              <el-card></el-card>
+              <el-card>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;添加变量
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-col :span="6">
+                    <el-input placeholder="Key"></el-input>
+                  </el-col>
+                  <el-col :span="6" :offset="1">
+                    <el-input placeholder="Value"></el-input>
+                  </el-col>
+                  <el-col :span="1" :offset="1">
+                    <el-button type="primary" size="small">添加</el-button>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;管理变量
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-table border style="width: 100%">
+                    <el-table-column label="Key"></el-table-column>
+                    <el-table-column label="Value"></el-table-column>
+                    <el-table-column label="操作"></el-table-column>
+                  </el-table>
+                </el-row>
+              </el-card>
             </el-tab-pane>
-            <el-tab-pane label="生命周期" name="fourth">
-              <el-card></el-card>
+            <el-tab-pane label="调度管理" name="forth">
+              <el-card>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;添加变量
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-col :span="6">
+                    <el-input placeholder="Key"></el-input>
+                  </el-col>
+                  <el-col :span="6" :offset="1">
+                    <el-input placeholder="Value"></el-input>
+                  </el-col>
+                  <el-col :span="1" :offset="1">
+                    <el-button type="primary" size="small">添加</el-button>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;管理变量
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-table border style="width: 100%">
+                    <el-table-column label="Key"></el-table-column>
+                    <el-table-column label="Value"></el-table-column>
+                    <el-table-column label="操作"></el-table-column>
+                  </el-table>
+                </el-row>
+              </el-card>
+            </el-tab-pane>
+            <el-tab-pane label="生命周期" name="fifth">
+              <el-card>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;添加卷
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-col :span="6">
+                    <el-input placeholder="端口"></el-input>
+                  </el-col>
+                  <el-col :span="6" :offset="1">
+                    <el-select style="width:100%" v-model="form.portType">
+                      <el-option label="TCP" value="TCP"></el-option>
+                      <el-option label="UDP" value="UDP"></el-option>
+                    </el-select>
+                  </el-col>
+                  <el-col :span="1" :offset="1">
+                    <el-button type="primary" size="small">添加</el-button>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <h3>
+                    <span style="color:#409EFF">|</span>&nbsp;管理卷
+                  </h3>
+                </el-row>
+                <el-row>
+                  <el-table border style="width: 100%">
+                    <el-table-column label="存储类型"></el-table-column>
+                    <el-table-column label="特性"></el-table-column>
+                    <el-table-column label="操作"></el-table-column>
+                  </el-table>
+                </el-row>
+              </el-card>
             </el-tab-pane>
           </el-tabs>
+        </el-form-item>
+        <el-form-item label="备注" :label-width="formLabelWidth">
+          <el-input
+            type="textarea"
+            placeholder="请输入内容"
+            v-model="textarea"
+            maxlength="30"
+            show-word-limit
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -251,9 +415,11 @@ export default {
         desc: '',
         computingPower: 0,
         GPUmemory: 0,
+        portType: '',
       },
       formLabelWidth: '120px',
       number: 1,
+      textarea: '',
     }
   },
 }
