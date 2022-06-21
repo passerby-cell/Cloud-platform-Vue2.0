@@ -18,7 +18,21 @@ import router from '@/router'
 Vue.use(VueRouter)
 Vue.use(ElementUI);
 
-
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (localStorage.getItem('token')) {
+      next()
+    } else {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    }
+  }
+  next()
+})
 
 
 Vue.config.productionTip = false

@@ -2,8 +2,8 @@
   <div>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item>我的作业</el-breadcrumb-item>
-      <el-breadcrumb-item>标准作业</el-breadcrumb-item>
-      <el-breadcrumb-item>新建作业</el-breadcrumb-item>
+      <el-breadcrumb-item>{{secondBread}}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{thirdBread}}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card class="card-style" shadow="hover">
       <el-form label-position="right" label-width="100px">
@@ -420,8 +420,17 @@ export default {
       formLabelWidth: '120px',
       number: 1,
       textarea: '',
+      secondBread: '标准作业',
+      thirdBread: '新建作业',
     }
   },
+  methods: {
+    getSecondBread(data) {
+      console.log('standardjob' + data)
+      this.secondBread = data
+    },
+  },
+  mounted() {},
 }
 </script>
 

@@ -14,6 +14,7 @@ export default [
     component: Login,
     meta: {
       show: false,
+
     }
   },
   {
@@ -22,6 +23,7 @@ export default [
     component: StandardJob,
     meta: {
       show: true,
+      requireAuth: true // 配置此条，进入页面前判断是否需要登陆 
     }
   },
   {
@@ -38,6 +40,7 @@ export default [
     component: Job,
     meta: {
       show: true,
+      requireAuth: true // 配置此条，进入页面前判断是否需要登陆 
     }
   },
   {
@@ -46,6 +49,7 @@ export default [
     component: Images,
     meta: {
       show: true,
+      requireAuth: true // 配置此条，进入页面前判断是否需要登陆 
     }
   },
   {
@@ -54,6 +58,7 @@ export default [
     component: File,
     meta: {
       show: true,
+      requireAuth: true // 配置此条，进入页面前判断是否需要登陆 
     }
   },
   {
@@ -62,6 +67,11 @@ export default [
     component: Data,
     meta: {
       show: true,
+      requireAuth: true // 配置此条，进入页面前判断是否需要登陆 
     }
   },
+  {
+    path: '/',
+    redirect: '/login'
+  }
 ]

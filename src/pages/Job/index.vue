@@ -2,7 +2,7 @@
   <div>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item>我的作业</el-breadcrumb-item>
-      <el-breadcrumb-item>标准作业</el-breadcrumb-item>
+      <el-breadcrumb-item>{{secondBread}}</el-breadcrumb-item>
     </el-breadcrumb>
 
     <el-button
@@ -116,6 +116,7 @@ export default {
           status: '已完成',
         },
       ],
+      secondBread: '标准作业',
     }
   },
   methods: {
@@ -134,6 +135,15 @@ export default {
     goStandardJob() {
       this.$router.push({ name: 'standardjob' })
     },
+    getSecondBread(data) {
+      this.secondBread = data
+    },
+  },
+  mounted() {
+    this.$bus.$on('getSecondBread', this.getSecondBread)
+  },
+  beforeDestroy() {
+    this.$bus.$off('getSecondBread')
   },
 }
 </script>

@@ -19,7 +19,7 @@
           </template>
         </el-submenu>
       </el-col>
-      <el-col :span="1">
+      <el-col :span="2">
         <el-menu-item index="2">Logout</el-menu-item>
       </el-col>
     </el-menu>

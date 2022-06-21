@@ -26,6 +26,9 @@ request.interceptors.response.use((res) => {
   // 成功的回调函数
   // 进度条结束
   nprogress.done()
+  if (res.token) {
+    localStorage.setItem('token', res.token)
+  }
   return res.data
 }, (error) => {
   // 失败的回调函数

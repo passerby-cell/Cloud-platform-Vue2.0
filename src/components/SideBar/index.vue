@@ -7,13 +7,14 @@
             <i class="el-icon-date"></i>
             <span>我的作业</span>
           </template>
-          <el-menu-item @click="toJob">
+
+          <el-menu-item @click="toJob('标准作业')">
             <span slot="title">标准作业</span>
           </el-menu-item>
-          <el-menu-item @click="toJob">
+          <el-menu-item @click="toJob('MPI作业')">
             <span slot="title">MPI作业</span>
           </el-menu-item>
-          <el-menu-item @click="toJob">
+          <el-menu-item @click="toJob('Tensorflow作业')">
             <span slot="title">Tensorflow作业</span>
           </el-menu-item>
         </el-submenu>
@@ -62,7 +63,8 @@ export default {
     return {}
   },
   methods: {
-    toJob() {
+    toJob(data) {
+      this.$bus.$emit('getSecondBread', data)
       this.$router.push({ name: 'job' })
     },
     toData() {

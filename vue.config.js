@@ -11,9 +11,9 @@ module.exports = defineConfig({
     // 代理服务器可以将路由中的指定前缀转发到指定的后端服务器中
     proxy: {
       '/api': {
-        target: 'http://gmall-h5-api.atguigu.cn',
-        //ws: true, // 是否启用websockets
-        //changeOrigin: true, // 代理时是否更改host
+        target: 'http://localhost:8080',
+        ws: true, // 是否启用websockets
+        changeOrigin: true, // 代理时是否更改host
       }
     }
   }
