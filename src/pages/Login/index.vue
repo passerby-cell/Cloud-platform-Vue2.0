@@ -47,6 +47,7 @@
 </template>
  
 <script scoped>
+import { reqUserLogin } from '@/api'
 export default {
   name: 'Login',
   data() {
@@ -57,10 +58,15 @@ export default {
       },
     }
   },
-  created() {},
   methods: {
-    doLogin() {
-      this.$router.push({ name: 'job' })
+    async doLogin() {
+      let login = await reqUserLogin(this.user)
+      if (login.token) {
+        this.$message({ message: login.message, type: 'success' })
+        this.$router.push({ name: 'job' })
+      } else {
+        this.$message.error(login.message)
+      }
     },
   },
 }
