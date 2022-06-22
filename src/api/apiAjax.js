@@ -29,6 +29,9 @@ request.interceptors.response.use((res) => {
   if (res.data.token) {
     localStorage.setItem('token', res.data.token)
   }
+  if (res.data.code == 201) {
+    localStorage.clear()
+  }
   return res.data
 }, (error) => {
   // 失败的回调函数
