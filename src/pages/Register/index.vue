@@ -28,7 +28,7 @@
             <label slot="label">二次确认</label>
             <el-row>
               <el-col :span="18">
-                <el-input v-model="user.password" show-password placeholder="请输入密码" size="small"></el-input>
+                <el-input v-model="verifyPassword" show-password placeholder="请输入密码" size="small"></el-input>
               </el-col>
             </el-row>
           </el-form-item>
@@ -40,7 +40,11 @@
               </el-col>
               <el-col :span="6" :offset="4">
                 <router-link to="/register" style="margin-left: 20px;">
-                  <el-button type="success" size="small">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</el-button>
+                  <el-button
+                    type="success"
+                    size="small"
+                    @click="goRegist"
+                  >注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</el-button>
                 </router-link>
               </el-col>
             </el-row>
@@ -52,6 +56,7 @@
 </template>
  
 <script>
+import { reqUserRegist } from '@/api'
 export default {
   name: 'Login',
   data() {
@@ -60,12 +65,45 @@ export default {
         username: '',
         password: '',
       },
+      verifyPassword: '',
     }
   },
-  created() {},
   methods: {
     goLogin() {
       this.$router.push({ name: 'login' })
+    },
+    async goRegist() {
+      let reg = /^(?![a-zA-Z]+$)(?![0-9]+$)[A-Za-z0-9]{8,18}$/
+      if (this.user.username) {
+        if (!reg.test(this.user.password)) {
+          this.$message({
+            message: '1.密码必须由字母、数字组成，区分大小写2.密码长度为8-18位',
+            type: 'warning',
+          })
+        } else if (this.verifyPassword != this.user.password) {
+          this.$message({
+            message: '两次密码不一致',
+            type: 'warning',
+          })
+        } else {
+          //发送请求
+          let result = await reqUserRegist(this.user)
+          if (result.code == '200') {
+            this.$message({
+              message: '注册成功',
+              type: 'success',
+            })
+            this.$router.push({ name: 'login' })
+          } else if (result.code == '201') {
+            this.$message.error('用户名重复')
+          }
+        }
+      } else {
+        this.$message({
+          message: '用户名不能为空!',
+          type: 'warning',
+        })
+      }
     },
   },
 }

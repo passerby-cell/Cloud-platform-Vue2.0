@@ -58,14 +58,23 @@ export default {
       },
     }
   },
+
   methods: {
     async doLogin() {
-      let login = await reqUserLogin(this.user)
-      if (login.token) {
-        this.$message({ message: login.message, type: 'success' })
-        this.$router.push({ name: 'job' })
+      if (!localStorage.getItem('token')) {
+        let result = await reqUserLogin(this.user)
+        if (result.code == '200') {
+          this.$message({
+            message: '登陆成功',
+            type: 'success',
+          })
+          localStorage.setItem('userid', result.data.id)
+          this.$router.push({ name: 'job' })
+        } else {
+          this.$message.error(result.message)
+        }
       } else {
-        this.$message.error(login.message)
+        this.$router.push({ name: 'job' })
       }
     },
   },

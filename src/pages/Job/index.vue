@@ -15,118 +15,84 @@
 
     <el-table
       style="width: 100%;margin-top:10px;margin-left:10px"
-      :data="job"
+      :data="joblist"
       :border="true"
       :row-class-name="tableRowClassName"
       :row-style="{height: '20px'}"
       max-height="580"
     >
-      <el-table-column prop="name" label="任务名"></el-table-column>
-      <el-table-column prop="startTime" label="开始时间" width="160"></el-table-column>
-      <el-table-column prop="stopTime" label="结束时间" width="160"></el-table-column>
-      <el-table-column prop="works" label="总任务数" sortable width="110"></el-table-column>
-      <el-table-column prop="isDone" label="运行完成数" width="120" sortable></el-table-column>
-      <el-table-column prop="inLine" label="排队中"></el-table-column>
-      <el-table-column prop="CPU" label="cpu使用量" width="160" sortable></el-table-column>
-      <el-table-column prop="MEM" label="内存使用量" width="160" sortable></el-table-column>
+      <el-table-column prop="jobname" label="任务名"></el-table-column>
+      <el-table-column prop="starttime" label="开始时间" width="160"></el-table-column>
+      <el-table-column prop="stoptime" label="结束时间" width="160"></el-table-column>
+      <el-table-column prop="workcount" label="总任务数" sortable width="110"></el-table-column>
+      <el-table-column prop="workdonecount" label="运行完成数" width="120" sortable></el-table-column>
+      <el-table-column prop="workinlinecount" label="排队中" sortable></el-table-column>
+      <el-table-column prop="cpucount" label="cpu使用量" width="120" sortable></el-table-column>
+      <el-table-column prop="memcount" label="内存使用量" width="120" sortable></el-table-column>
       <el-table-column prop="status" label="状态" sortable></el-table-column>
-      <el-table-column prop="update" label="操作" width="160">
+      <el-table-column label="操作" width="160">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary">暂停</el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            v-if="scope.row.status!='已完成'&&scope.row.status!='排队中'"
+          >暂停</el-button>
           <el-button size="mini" type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <el-col style="text-align: center;">
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+      <el-pagination
+        :background="true"
+        :page-sizes="[1, 2, 3, 4, 5, 6, 7, 8]"
+        :page-size="page"
+        layout="prev, pager, next,sizes"
+        :page-count="Number(totalpage)"
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
+      ></el-pagination>
     </el-col>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Job',
   data() {
     return {
-      job: [
-        {
-          name: '180',
-          startTime: 'now',
-          stopTime: 'tomorrow',
-          works: '12',
-          isDone: '10',
-          inLine: '2',
-          CPU: '80%',
-          MEM: '80%',
-          status: '执行中',
-        },
-        {
-          name: '180',
-          startTime: 'now',
-          stopTime: 'tomorrow',
-          works: '12',
-          isDone: '10',
-          inLine: '2',
-          CPU: '80%',
-          MEM: '80%',
-          status: '执行中',
-        },
-        {
-          name: '180',
-          startTime: 'now',
-          stopTime: 'tomorrow',
-          works: '12',
-          isDone: '10',
-          inLine: '2',
-          CPU: '20%',
-          MEM: '20%',
-          status: '执行中',
-        },
-        {
-          name: '180',
-          startTime: 'now',
-          stopTime: 'tomorrow',
-          works: '12',
-          isDone: '10',
-          inLine: '2',
-          CPU: '80%',
-          MEM: '80%',
-          status: '已完成',
-        },
-        {
-          name: '180',
-          startTime: 'now',
-          stopTime: 'tomorrow',
-          works: '12',
-          isDone: '10',
-          inLine: '2',
-          CPU: '80%',
-          MEM: '80%',
-          status: '执行中',
-        },
-        {
-          name: '180',
-          startTime: 'now',
-          stopTime: 'tomorrow',
-          works: '12',
-          isDone: '10',
-          inLine: '2',
-          CPU: '50%',
-          MEM: '50%',
-          status: '已完成',
-        },
-      ],
       secondBread: '标准作业',
+      page: 8,
     }
   },
+  computed: {
+    ...mapState('Job', ['joblist', 'pagesize', 'pagenum', 'totalpage']),
+  },
   methods: {
+    handleSizeChange(val) {
+      this.page = val
+      this.$store.dispatch('Job/getJobList', {
+        token: localStorage.getItem('token'),
+        userid: localStorage.getItem('userid'),
+        pagenum: val,
+        pagesize: this.page,
+      })
+    },
+    handleCurrentChange(val) {
+      this.$store.dispatch('Job/getJobList', {
+        token: localStorage.getItem('token'),
+        userid: localStorage.getItem('userid'),
+        pagenum: val,
+        pagesize: this.page,
+      })
+    },
     tableRowClassName({ rowIndex }) {
-      if (this.job[rowIndex].status === '已完成') {
+      if (this.joblist[rowIndex].status === '已完成') {
         return 'success-row'
       }
       if (
-        parseInt(this.job[rowIndex].CPU.split('%')[0]) >= 60 ||
-        parseInt(this.job[rowIndex].MEM.split('%')[0]) >= 60
+        parseInt(this.joblist[rowIndex].cpucount.split('%')[0]) >= 60 ||
+        parseInt(this.joblist[rowIndex].memcount.split('%')[0]) >= 60
       ) {
         return 'warning-row'
       }
@@ -140,6 +106,12 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch('Job/getJobList', {
+      token: localStorage.getItem('token'),
+      userid: localStorage.getItem('userid'),
+      pagenum: 1,
+      pagesize: this.page,
+    })
     this.$bus.$on('getSecondBread', this.getSecondBread)
   },
   beforeDestroy() {

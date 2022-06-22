@@ -42,13 +42,13 @@
         <el-submenu index="4">
           <template slot="title">
             <i class="el-icon-files"></i>
-            <span>文件服务</span>
+            <span>在线IDE</span>
           </template>
           <el-menu-item @click="toFile">
-            <span slot="title">文件管理</span>
+            <span slot="title">开启IDE</span>
           </el-menu-item>
           <el-menu-item>
-            <span slot="title">在线IDE</span>
+            <span slot="title">关闭IDE</span>
           </el-menu-item>
         </el-submenu>
       </el-menu>
@@ -74,7 +74,7 @@ export default {
       this.$router.push({ name: 'images' })
     },
     toFile() {
-      this.$router.push({ name: 'file' })
+      this.$router.push({ name: 'ide' })
     },
   },
 }

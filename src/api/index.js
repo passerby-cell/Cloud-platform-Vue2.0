@@ -12,3 +12,23 @@ export const reqUserLogin = (user) => apirequest({
     password: user.password,
   }
 })
+
+export const reqUserRegist = (user) => apirequest({
+  url: '/user/regist',
+  method: 'GET',
+  params: {
+    username: user.username,
+    password: user.password,
+  }
+})
+
+export const reqJobList = (token, userid, pagenum, pagesize) => apirequest({
+  url: '/job/getjoblist',
+  method: 'GET',
+  params: {
+    token,
+    userid,
+    pagenum,
+    pagesize,
+  }
+})
