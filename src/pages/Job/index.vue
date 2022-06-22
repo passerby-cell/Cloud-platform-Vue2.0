@@ -35,8 +35,15 @@
           <el-button
             size="mini"
             type="primary"
-            v-if="scope.row.status!='已完成'&&scope.row.status!='排队中'"
+            v-if="scope.row.status!='已完成'&&scope.row.status!='排队中'&&scope.row.status!='暂停中'"
+            @click="pauseJob(scope.row.id)"
           >暂停</el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            v-if="scope.row.status=='暂停中'"
+            @click="startJob(scope.row.id)"
+          >启动</el-button>
           <el-button size="mini" type="danger">删除</el-button>
         </template>
       </el-table-column>
@@ -57,6 +64,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { reqPauseJob, reqStartJob } from '@/api'
 export default {
   name: 'Job',
   data() {
@@ -69,6 +77,42 @@ export default {
     ...mapState('Job', ['joblist', 'pagesize', 'pagenum', 'totalpage']),
   },
   methods: {
+    async pauseJob(id) {
+      let result = await reqPauseJob(localStorage.getItem('token'), id)
+      if (result.code == '200') {
+        this.$message({
+          message: result.message,
+          type: 'success',
+        })
+        this.$store.dispatch('Job/getJobList', {
+          token: localStorage.getItem('token'),
+          userid: localStorage.getItem('userid'),
+          pagenum: this.pagenum,
+          pagesize: this.page,
+        })
+      } else {
+        localStorage.clear()
+        this.$router.push({ name: 'login' })
+      }
+    },
+    async startJob(id) {
+      let result = await reqStartJob(localStorage.getItem('token'), id)
+      if (result.code == '200') {
+        this.$message({
+          message: result.message,
+          type: 'success',
+        })
+        this.$store.dispatch('Job/getJobList', {
+          token: localStorage.getItem('token'),
+          userid: localStorage.getItem('userid'),
+          pagenum: this.pagenum,
+          pagesize: this.page,
+        })
+      } else {
+        localStorage.clear()
+        this.$router.push({ name: 'login' })
+      }
+    },
     handleSizeChange(val) {
       this.page = val
       this.$store.dispatch('Job/getJobList', {

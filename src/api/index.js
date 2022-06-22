@@ -32,3 +32,21 @@ export const reqJobList = (token, userid, pagenum, pagesize) => apirequest({
     pagesize,
   }
 })
+
+export const reqPauseJob = (token, id) => apirequest({
+  url: '/job/pausejob',
+  method: 'GET',
+  params: {
+    token,
+    id,
+  }
+})
+
+export const reqStartJob = (token, id) => apirequest({
+  url: '/job/startjob',
+  method: 'GET',
+  params: {
+    token,
+    id,
+  }
+})
