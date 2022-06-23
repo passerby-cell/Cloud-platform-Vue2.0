@@ -31,6 +31,11 @@ router.beforeEach((to, from, next) => {
       })
     }
   }
+  if ((to.name === 'login') && localStorage.getItem('token')) {
+    next({
+      path: '/job',
+    })
+  }
   next()
 })
 

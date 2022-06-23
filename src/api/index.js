@@ -50,3 +50,12 @@ export const reqStartJob = (token, id) => apirequest({
     id,
   }
 })
+
+export const reqDeleteJob = (token, id) => apirequest({
+  url: '/job/deletejob',
+  method: 'DELETE',
+  params: {
+    token,
+    id,
+  }
+})

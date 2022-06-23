@@ -44,7 +44,7 @@
             v-if="scope.row.status=='暂停中'"
             @click="startJob(scope.row.id)"
           >启动</el-button>
-          <el-button size="mini" type="danger">删除</el-button>
+          <el-button size="mini" type="danger" @click="deleteJob(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -64,7 +64,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { reqPauseJob, reqStartJob } from '@/api'
+import { reqPauseJob, reqStartJob, reqDeleteJob } from '@/api'
 export default {
   name: 'Job',
   data() {
@@ -108,9 +108,21 @@ export default {
           pagenum: this.pagenum,
           pagesize: this.page,
         })
-      } else {
-        localStorage.clear()
-        this.$router.push({ name: 'login' })
+      }
+    },
+    async deleteJob(id) {
+      let result = await reqDeleteJob(localStorage.getItem('token'), id)
+      if (result.code == '200') {
+        this.$message({
+          message: result.message,
+          type: 'success',
+        })
+        this.$store.dispatch('Job/getJobList', {
+          token: localStorage.getItem('token'),
+          userid: localStorage.getItem('userid'),
+          pagenum: this.pagenum,
+          pagesize: this.page,
+        })
       }
     },
     handleSizeChange(val) {

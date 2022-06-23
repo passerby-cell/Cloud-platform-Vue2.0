@@ -31,6 +31,7 @@
 <script>
 export default {
   name: 'Header',
+
   methods: {
     logout() {
       localStorage.clear()
