@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 //引入各存储模块
 import Job from './job'
+import File from './file'
 
 Vue.use(Vuex)
 
@@ -9,5 +10,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     Job,
+    File,
   }
 })

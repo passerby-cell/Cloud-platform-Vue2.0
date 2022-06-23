@@ -59,3 +59,15 @@ export const reqDeleteJob = (token, id) => apirequest({
     id,
   }
 })
+
+export const reqFileList = (token, userid, parentdirid, pagenum, pagesize) => apirequest({
+  url: '/file/getfilelist',
+  method: 'GET',
+  params: {
+    token,
+    userid,
+    parentdirid,
+    pagenum,
+    pagesize,
+  }
+})

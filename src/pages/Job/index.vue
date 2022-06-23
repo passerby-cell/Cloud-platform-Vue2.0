@@ -130,7 +130,7 @@ export default {
       this.$store.dispatch('Job/getJobList', {
         token: localStorage.getItem('token'),
         userid: localStorage.getItem('userid'),
-        pagenum: val,
+        pagenum: 1,
         pagesize: this.page,
       })
     },
