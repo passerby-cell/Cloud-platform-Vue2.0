@@ -60,16 +60,14 @@
                 <i class="el-icon-document" v-if="scope.row.isfile==1"></i>
               </el-col>
               <el-col :span="22" :offset="1">
-                <div @keydown.enter="updatename(scope.row)">
-                  <el-input
-                    v-focus
-                    size="small"
-                    v-model="scope.row.name"
-                    v-if="!Boolean(scope.row.isshow)"
-                    placeholder="scope.row.name"
-                    @keydown.enter="updatename(scope.row)"
-                  ></el-input>
-                </div>
+                <el-input
+                  v-focus
+                  size="small"
+                  v-model="scope.row.name"
+                  v-if="!Boolean(scope.row.isshow)"
+                  placeholder="scope.row.name"
+                  @blur="updatename(scope.row)"
+                ></el-input>
                 <span
                   v-show="Boolean(scope.row.isshow)"
                   @click="scope.row.isshow = !Boolean(scope.row.isshow)"
