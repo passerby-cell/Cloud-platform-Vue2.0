@@ -40,7 +40,7 @@
           >暂停</el-button>
           <el-button
             size="mini"
-            type="primary"
+            type="success"
             v-if="scope.row.status=='暂停中'"
             @click="startJob(scope.row.id)"
           >启动</el-button>

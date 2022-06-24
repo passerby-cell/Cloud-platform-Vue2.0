@@ -71,3 +71,27 @@ export const reqFileList = (token, userid, parentdirid, pagenum, pagesize) => ap
     pagesize,
   }
 })
+
+export const reqMKDir = (token, userid, dirname, dirpath, parentdirid) => apirequest({
+  url: '/file/mkdir',
+  method: 'GET',
+  params: {
+    token,
+    userid,
+    dirname,
+    dirpath,
+    parentdirid,
+  }
+})
+
+export const reqUploadFile = (token, userid, dirpath, parentdirid, data) => apirequest({
+  url: '/file/uploadfile',
+  method: 'POST',
+  params: {
+    token,
+    userid,
+    dirpath,
+    parentdirid,
+  },
+  data: data
+})
