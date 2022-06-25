@@ -121,7 +121,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="uploaddate" label="上传日期" width="300"></el-table-column>
-        <el-table-column prop="size" label="大小"></el-table-column>
+        <el-table-column prop="size" label="大小(MB)"></el-table-column>
         <el-table-column label="操作" width="400">
           <template slot-scope="scope">
             <el-button
@@ -214,7 +214,6 @@ export default {
       this.path.forEach((item) => {
         dirpath = dirpath + '/' + item
       })
-      console.log(dirpath)
       let parentdirid = this.idpath[this.idpath.length - 1]
 
       const formData = new FormData()
@@ -338,11 +337,13 @@ export default {
       row.isshow = !Boolean(row.isshow)
     },
     handleCurrentChange(val) {
-      this.updateFileList(val, localStorage.getItem('userid'))
+      let parentdirid = this.idpath[this.idpath.length - 1]
+      this.updateFileList(val, parentdirid)
     },
     handleSizeChange(val) {
       this.page = val
-      this.updateFileList(1, localStorage.getItem('userid'))
+      let parentdirid = this.idpath[this.idpath.length - 1]
+      this.updateFileList(1, parentdirid)
     },
   },
   mounted() {
