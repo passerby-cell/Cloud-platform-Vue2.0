@@ -44,7 +44,7 @@
       <el-dialog
         title="上传"
         :visible.sync="uploadDialogVisible"
-        width="30%"
+        width="433px"
         :before-close="handleClose"
       >
         <el-upload
