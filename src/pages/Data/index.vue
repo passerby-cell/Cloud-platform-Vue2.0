@@ -69,7 +69,7 @@
         </span>
       </el-dialog>
       <a
-        :href="files==''?'':'http://localhost:8080/file/downloadfiles?token='+localtoken+'&name='+files+'&dirpath='+dirpath"
+        :href="files=='http://localhost:10086/data'?'':'http://localhost:8080/file/downloadfiles?token='+localtoken+'&name='+files+'&dirpath='+dirpath"
       >
         <el-button
           style="margin-top:10px;margin-left: 10px;"
@@ -309,10 +309,12 @@ export default {
         .catch((_) => {})
     },
     selectTableAll() {
-      if (this.checkedfile.length == this.filelist.length) {
+      if (this.checkedfile.length >= this.filelist.length) {
         this.checkedfile = []
         this.checkedfileid = []
       } else {
+        this.checkedfile = []
+        this.checkedfileid = []
         this.filelist.forEach((item) => {
           this.checkedfileid.push(item.id)
           this.checkedfile.push(item.name)
