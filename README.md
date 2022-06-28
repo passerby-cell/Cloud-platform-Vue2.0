@@ -15,3 +15,5 @@
 `npm i swiper@5`
 ## install iview 
 `npm install iview`
+## install iview 处理axios的post请求,使后端能够接收
+`npm install qs`

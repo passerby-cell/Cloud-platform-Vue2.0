@@ -95,3 +95,16 @@ export const reqUploadFile = (token, userid, dirpath, parentdirid, data) => apir
   },
   data: data
 })
+
+export const reqUpdataFileName = (token, userid, newname, oldname, id, dirpath) => apirequest({
+  url: '/file/updatename',
+  method: 'GET',
+  params: {
+    token,
+    userid,
+    newname,
+    oldname,
+    id,
+    dirpath,
+  },
+})

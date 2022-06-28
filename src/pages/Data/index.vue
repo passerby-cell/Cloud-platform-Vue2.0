@@ -68,13 +68,17 @@
           <el-button type="primary" size="small" @click="submitUpload">上 传</el-button>
         </span>
       </el-dialog>
-      <el-button
-        style="margin-top:10px;margin-left: 10px;"
-        type="primary"
-        icon="el-icon-download"
-        size="small"
-      >下载文件</el-button>
-
+      <a
+        :href="'http://localhost:8080/file/downloadfiles?token='+localtoken+'&name='+files+'&dirpath='+dirpath"
+      >
+        <el-button
+          style="margin-top:10px;margin-left: 10px;"
+          type="primary"
+          icon="el-icon-download"
+          size="small"
+        >下载文件</el-button>
+      </a>
+      <!-- @click="downloadFiles" -->
       <el-button
         style="margin-top:10px;margin-left: 10px;"
         type="danger"
@@ -111,6 +115,7 @@
                   v-if="!Boolean(scope.row.isshow)"
                   placeholder="scope.row.name"
                   @blur="updatename(scope.row)"
+                  @focus="oldname=scope.row.name"
                 ></el-input>
                 <span
                   v-show="Boolean(scope.row.isshow)"
@@ -131,13 +136,18 @@
               size="small"
               v-if="scope.row.isfile==1"
             >预览</el-button>
-            <el-button
-              style="margin-left: 10px;"
-              type="warning"
-              icon="el-icon-download"
-              size="small"
-              v-if="scope.row.isfile==1"
-            >下载</el-button>
+            <a
+              :href="'http://localhost:8080/file/downloadfile?token='+localtoken+'&name='+scope.row.name+'&dirpath='+dirpath"
+            >
+              <el-button
+                style="margin-left: 10px;"
+                type="warning"
+                icon="el-icon-download"
+                size="small"
+                v-if="scope.row.isfile==1"
+              >下载</el-button>
+            </a>
+            <!-- @click="downloadFile(scope.row.name)" -->
             <el-button
               style="margin-left: 10px;"
               type="success"
@@ -172,7 +182,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { reqMKDir, reqUploadFile } from '@/api'
+import { reqMKDir, reqUploadFile, reqUpdataFileName } from '@/api'
+import resolveBlob from '@/utils/FileDownload'
 export default {
   name: 'Data',
   data() {
@@ -193,6 +204,8 @@ export default {
       uploadDialogVisible: false,
       // 新建文件夹的名称
       newDirName: '',
+      // 旧文件的名称
+      oldname: '',
     }
   },
   directives: {
@@ -207,8 +220,50 @@ export default {
   },
   computed: {
     ...mapState('File', ['filelist', 'pagesize', 'pagenum', 'totalpage']),
+    dirpath() {
+      let dirpath = ''
+      this.path.forEach((item) => {
+        dirpath = dirpath + '/' + item
+      })
+      return dirpath
+    },
+    localtoken() {
+      return localStorage.getItem('token')
+    },
+    files() {
+      let files = ''
+      for (const element of this.checkedfile) {
+        files += '/' + element
+      }
+      return files
+    },
   },
   methods: {
+    // downloadFiles() {
+    //   let files = ''
+    //   for (const element of this.checkedfile) {
+    //     files += '/' + element
+    //   }
+    //   if (this.checkedfile.length != 0) {
+    //     let _this = this
+    //     this.axios({
+    //       url: 'api/file/downloadfiles',
+    //       method: 'GET',
+    //       params: {
+    //         token: localStorage.getItem('token'),
+    //         name: files,
+    //         dirpath: _this.dirpath,
+    //       },
+    //       headers: {
+    //         'Content-Type': 'application/octet-stream',
+    //       },
+    //       responseType: 'blob',
+    //     }).then((response) => {
+    //       resolveBlob(response, 'application/octet-stream')
+    //     })
+    //   }
+    // },
+
     async uploadFile(files) {
       let dirpath = ''
       this.path.forEach((item) => {
@@ -320,8 +375,6 @@ export default {
     openDir(row) {
       this.path.push(row.name)
       this.idpath.push(row.id)
-      console.log(this.path)
-      console.log(this.idpath)
       this.updateFileList(1, row.id)
     },
     updateFileList(val, dirid) {
@@ -333,8 +386,28 @@ export default {
         pagesize: this.page,
       })
     },
-    updatename(row) {
+    async updatename(row) {
       row.isshow = !Boolean(row.isshow)
+      let dirpath = ''
+      this.path.forEach((item) => {
+        dirpath = dirpath + '/' + item
+      })
+      let result = await reqUpdataFileName(
+        localStorage.getItem('token'),
+        localStorage.getItem('userid'),
+        row.name,
+        this.oldname,
+        row.id,
+        dirpath
+      )
+      if (result.code == '200') {
+        this.$message({
+          type: 'success',
+          message: '修改成功',
+        })
+      } else {
+        this.$message.error(result.message)
+      }
     },
     handleCurrentChange(val) {
       let parentdirid = this.idpath[this.idpath.length - 1]
