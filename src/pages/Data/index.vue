@@ -69,7 +69,7 @@
         </span>
       </el-dialog>
       <a
-        :href="'http://localhost:8080/file/downloadfiles?token='+localtoken+'&name='+files+'&dirpath='+dirpath"
+        :href="files==''?'':'http://localhost:8080/file/downloadfiles?token='+localtoken+'&name='+files+'&dirpath='+dirpath"
       >
         <el-button
           style="margin-top:10px;margin-left: 10px;"
@@ -183,7 +183,6 @@
 <script>
 import { mapState } from 'vuex'
 import { reqMKDir, reqUploadFile, reqUpdataFileName } from '@/api'
-import resolveBlob from '@/utils/FileDownload'
 export default {
   name: 'Data',
   data() {
@@ -239,31 +238,6 @@ export default {
     },
   },
   methods: {
-    // downloadFiles() {
-    //   let files = ''
-    //   for (const element of this.checkedfile) {
-    //     files += '/' + element
-    //   }
-    //   if (this.checkedfile.length != 0) {
-    //     let _this = this
-    //     this.axios({
-    //       url: 'api/file/downloadfiles',
-    //       method: 'GET',
-    //       params: {
-    //         token: localStorage.getItem('token'),
-    //         name: files,
-    //         dirpath: _this.dirpath,
-    //       },
-    //       headers: {
-    //         'Content-Type': 'application/octet-stream',
-    //       },
-    //       responseType: 'blob',
-    //     }).then((response) => {
-    //       resolveBlob(response, 'application/octet-stream')
-    //     })
-    //   }
-    // },
-
     async uploadFile(files) {
       let dirpath = ''
       this.path.forEach((item) => {
