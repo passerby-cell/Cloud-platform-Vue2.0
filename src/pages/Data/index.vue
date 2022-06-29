@@ -84,6 +84,7 @@
         type="danger"
         icon="el-icon-delete"
         size="small"
+        @click="deleteFiles"
       >删除选中</el-button>
     </el-row>
     <el-row>
@@ -135,6 +136,7 @@
               icon="el-icon-view"
               size="small"
               v-if="scope.row.isfile==1"
+              @click="previewFile(scope.row.name)"
             >预览</el-button>
             <a
               :href="'http://localhost:8080/file/downloadfile?token='+localtoken+'&name='+scope.row.name+'&dirpath='+dirpath"
@@ -161,6 +163,7 @@
               type="danger"
               icon="el-icon-delete"
               size="small"
+              @click="deleteFile(scope.row)"
             >删除</el-button>
           </template>
         </el-table-column>
@@ -182,7 +185,13 @@
 
 <script>
 import { mapState } from 'vuex'
-import { reqMKDir, reqUploadFile, reqUpdataFileName } from '@/api'
+import {
+  reqMKDir,
+  reqUploadFile,
+  reqUpdataFileName,
+  reqDeleteFiles,
+  reqDeleteFile,
+} from '@/api'
 export default {
   name: 'Data',
   data() {
@@ -226,6 +235,13 @@ export default {
       })
       return dirpath
     },
+    ids() {
+      let ids = ''
+      for (const element of this.checkedfileid) {
+        ids += '/' + element
+      }
+      return ids
+    },
     localtoken() {
       return localStorage.getItem('token')
     },
@@ -238,6 +254,57 @@ export default {
     },
   },
   methods: {
+    previewFile(name) {
+      let url = 'http://127.0.0.1:8080/preview/' + this.dirpath + '/' + name
+      // let url =
+      //   'http://localhost:8080/file/downloadfile?token=' +
+      //   this.localtoken +
+      //   '&name=' +
+      //   name +
+      //   '&dirpath=' +
+      //   this.dirpath
+      console.log(url)
+      let Base64 = require('js-base64').Base64
+      window.open(
+        'http://127.0.0.1:8012/onlinePreview?url=' +
+          encodeURIComponent(Base64.encode(url))
+      )
+    },
+    async deleteFiles() {
+      let result = await reqDeleteFiles(
+        this.localtoken,
+        this.files,
+        this.ids,
+        this.dirpath
+      )
+      if (result.code == '200') {
+        this.$message({
+          type: 'success',
+          message: result.message,
+        })
+      }
+      let parentdirid = this.idpath[this.idpath.length - 1]
+      this.updateFileList(this.pagenum, parentdirid)
+      this.checkedfile = []
+      this.checkedfileid = []
+    },
+    async deleteFile(row) {
+      let result = await reqDeleteFile(
+        this.localtoken,
+        row.name,
+        row.id,
+        this.dirpath,
+        row.isfile
+      )
+      if (result.code == '200') {
+        this.$message({
+          type: 'success',
+          message: result.message,
+        })
+      }
+      let parentdirid = this.idpath[this.idpath.length - 1]
+      this.updateFileList(this.pagenum, parentdirid)
+    },
     async uploadFile(files) {
       let dirpath = ''
       this.path.forEach((item) => {

@@ -108,3 +108,26 @@ export const reqUpdataFileName = (token, userid, newname, oldname, id, dirpath) 
     dirpath,
   },
 })
+
+export const reqDeleteFile = (token, name, id, dirpath, isfile) => apirequest({
+  url: '/file/deletefile',
+  method: 'DELETE',
+  params: {
+    token,
+    name,
+    id,
+    dirpath,
+    isfile
+  },
+})
+
+export const reqDeleteFiles = (token, names, ids, dirpath) => apirequest({
+  url: '/file/deletefiles',
+  method: 'DELETE',
+  params: {
+    token,
+    names,
+    ids,
+    dirpath
+  },
+})
