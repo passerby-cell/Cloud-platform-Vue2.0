@@ -255,7 +255,7 @@ export default {
   },
   methods: {
     previewFile(name) {
-      let url = 'http://127.0.0.1:8080/preview/' + this.dirpath + '/' + name
+      let url = 'http://127.0.0.1:8080/preview' + this.dirpath + '/' + name
       // let url =
       //   'http://localhost:8080/file/downloadfile?token=' +
       //   this.localtoken +
@@ -263,7 +263,7 @@ export default {
       //   name +
       //   '&dirpath=' +
       //   this.dirpath
-      console.log(url)
+      // console.log(url)
       let Base64 = require('js-base64').Base64
       window.open(
         'http://127.0.0.1:8012/onlinePreview?url=' +
