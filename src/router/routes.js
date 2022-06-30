@@ -3,7 +3,6 @@ import Login from '@/pages/Login'
 import Job from '@/pages/Job'
 import Data from '@/pages/Data'
 import Images from '@/pages/Images'
-import IDE from '@/pages/IDE'
 import Register from '@/pages/Register'
 import StandardJob from '@/pages/StandardJob'
 export default [
@@ -47,15 +46,6 @@ export default [
     name: 'images',
     path: '/images',
     component: Images,
-    meta: {
-      show: true,
-      requireAuth: true // 配置此条，进入页面前判断是否需要登陆 
-    }
-  },
-  {
-    name: 'ide',
-    path: '/ide',
-    component: IDE,
     meta: {
       show: true,
       requireAuth: true // 配置此条，进入页面前判断是否需要登陆 

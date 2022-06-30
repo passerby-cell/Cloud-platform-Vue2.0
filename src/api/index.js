@@ -131,3 +131,21 @@ export const reqDeleteFiles = (token, names, ids, dirpath) => apirequest({
     dirpath
   },
 })
+
+export const reqStartIDE = (token, userid) => apirequest({
+  url: '/ide/start',
+  method: 'GET',
+  params: {
+    token,
+    userid,
+  },
+})
+
+export const reqStopIDE = (token, userid) => apirequest({
+  url: '/ide/stop',
+  method: 'GET',
+  params: {
+    token,
+    userid,
+  },
+})

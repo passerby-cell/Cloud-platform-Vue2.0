@@ -44,10 +44,10 @@
             <i class="el-icon-files"></i>
             <span>在线IDE</span>
           </template>
-          <el-menu-item @click="toFile">
+          <el-menu-item @click="startIDE">
             <span slot="title">开启IDE</span>
           </el-menu-item>
-          <el-menu-item>
+          <el-menu-item @click="stopIDE">
             <span slot="title">关闭IDE</span>
           </el-menu-item>
         </el-submenu>
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { Loading } from 'element-ui'
+import { reqStartIDE, reqStopIDE } from '@/api'
 export default {
   name: 'SideBar',
   data() {
@@ -73,8 +75,33 @@ export default {
     toImages() {
       this.$router.push({ name: 'images' })
     },
-    toFile() {
-      this.$router.push({ name: 'ide' })
+    async startIDE() {
+      let result = await reqStartIDE(
+        localStorage.getItem('token'),
+        localStorage.getItem('userid')
+      )
+      if (result.code == '200') {
+        let loading = Loading.service({
+          fullscreen: true,
+          text: '在线IDE加载中...',
+        })
+        setTimeout(() => {
+          loading.close()
+          window.open(result.data, '_blank')
+        }, 5000)
+      }
+    },
+    async stopIDE() {
+      let result = await reqStopIDE(
+        localStorage.getItem('token'),
+        localStorage.getItem('userid')
+      )
+      if (result.code == '200') {
+        this.$message({
+          type: 'success',
+          message: '关闭成功',
+        })
+      }
     },
   },
 }
