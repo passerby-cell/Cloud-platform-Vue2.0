@@ -11,12 +11,12 @@
           <el-menu-item @click="toJob('标准作业')">
             <span slot="title">标准作业</span>
           </el-menu-item>
-          <el-menu-item @click="toJob('MPI作业')">
+          <!-- <el-menu-item @click="toJob('MPI作业')">
             <span slot="title">MPI作业</span>
           </el-menu-item>
           <el-menu-item @click="toJob('Tensorflow作业')">
             <span slot="title">Tensorflow作业</span>
-          </el-menu-item>
+          </el-menu-item> -->
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">

@@ -7,7 +7,7 @@
       active-text-color="#ffd04b"
     >
       <el-col :span="5">
-        <div style="text-align:center;height:60px">
+        <div style="text-align: center;height:60px">
           <img src="@/assets/images/favicon.png" style="height: 40px;width: 40px;margin-top:10px" />
           <span class="font">AI/大数据应用支撑平台</span>
         </div>
@@ -43,8 +43,8 @@ export default {
 <style scoped>
 .font {
   float: right;
-  margin-right: 40px;
   font-size: 20px;
+  /* padding-right: 40px; */
   font-style: oblique;
   color: #409eff;
 }

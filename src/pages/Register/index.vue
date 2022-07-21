@@ -159,10 +159,10 @@ export default {
 }
 .font {
   float: right;
-  margin-right: 40px;
-  margin-top: 18px;
   font-size: 20px;
+  /* padding-right: 40px; */
   font-style: oblique;
   color: #409eff;
+  margin-top: 20px;
 }
 </style>
